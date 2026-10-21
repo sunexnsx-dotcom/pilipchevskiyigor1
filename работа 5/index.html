@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Лабораторная работа</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px 0;
+        }
+
+        button {
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Лабораторная работа</h1>
+
+
+    <!-- =====================================
+         ЗАДАНИЕ 1
+         Вариант 4 — високосный год
+         ===================================== -->
+
+    <section>
+
+        <h2>Задание 1</h2>
+
+        <p>
+            Определить, является ли год високосным,
+            и вывести количество дней в году.
+        </p>
+
+        <input
+            type="number"
+            id="year"
+            placeholder="Введите год">
+
+        <button onclick="checkYear()">
+            Проверить
+        </button>
+
+        <div
+            class="result"
+            id="yearResult">
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         ЗАДАНИЕ 2А
+         Вариант 1 — сумма до первого sin(x) > 0
+         ===================================== -->
+
+    <section>
+
+        <h2>Задание 2А</h2>
+
+        <p>
+            Найти сумму элементов массива
+            до первого элемента, синус которого положительный.
+        </p>
+
+        <input
+            type="text"
+            id="arrayA"
+            placeholder="Например: -2, -1, 1, 3, 5">
+
+        <button onclick="calculateA()">
+            Вычислить
+        </button>
+
+        <div
+            class="result"
+            id="resultA">
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         ЗАДАНИЕ 2Б
+         Вариант 4 — удалить элементы,
+         сумма цифр которых чётная
+         ===================================== -->
+
+    <section>
+
+        <h2>Задание 2Б</h2>
+
+        <p>
+            Удалить из массива элементы,
+            сумма цифр целой части которых чётная.
+        </p>
+
+        <input
+            type="text"
+            id="arrayB"
+            placeholder="Например: 12, 35, 48, 71">
+
+        <button onclick="calculateB()">
+            Обработать
+        </button>
+
+        <div
+            class="result"
+            id="resultB">
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         ЗАДАНИЕ 4
+         Вариант 5 — палиндром
+         ===================================== -->
+
+    <section>
+
+        <h2>Задание 4</h2>
+
+        <p>
+            Проверить, является ли слово палиндромом.
+        </p>
+
+        <input
+            type="text"
+            id="word"
+            placeholder="Введите слово">
+
+        <button onclick="checkPalindrome()">
+            Проверить
+        </button>
+
+        <div
+            class="result"
+            id="resultWord">
+        </div>
+
+    </section>
+
+
+    <script>
+
+        /* =====================================
+           ЗАДАНИЕ 1
+           ===================================== */
+
+        function checkYear() {
+
+            let year = Number(
+                document.getElementById("year").value
+            );
+
+            let result;
+
+            if (
+                year % 400 === 0 ||
+                (year % 4 === 0 && year % 100 !== 0)
+            ) {
+
+                result =
+                    year +
+                    " год — високосный. Дней: 366.";
+
+            } else {
+
+                result =
+                    year +
+                    " год — не високосный. Дней: 365.";
+
+            }
+
+            document.getElementById(
+                "yearResult"
+            ).textContent = result;
+
+        }
+
+
+        /* =====================================
+           ЗАДАНИЕ 2А
+           ===================================== */
+
+        function calculateA() {
+
+            let text =
+                document.getElementById("arrayA").value;
+
+            let array =
+                text.split(",").map(Number);
+
+            let sum = 0;
+
+            let found = false;
+
+            for (let i = 0; i < array.length; i++) {
+
+                if (Math.sin(array[i]) > 0) {
+
+                    found = true;
+
+                    break;
+
+                }
+
+                sum += array[i];
+
+            }
+
+            if (found) {
+
+                document.getElementById(
+                    "resultA"
+                ).textContent =
+                    "Сумма: " + sum;
+
+            } else {
+
+                document.getElementById(
+                    "resultA"
+                ).textContent =
+                    "Подходящий элемент не найден. Сумма: " + sum;
+
+            }
+
+        }
+
+
+        /* =====================================
+           ЗАДАНИЕ 2Б
+           ===================================== */
+
+        function calculateB() {
+
+            let text =
+                document.getElementById("arrayB").value;
+
+            let array =
+                text.split(",").map(Number);
+
+            let result = [];
+
+            for (let i = 0; i < array.length; i++) {
+
+                let number =
+                    Math.abs(Math.trunc(array[i]));
+
+                let digitsSum = 0;
+
+                while (number > 0) {
+
+                    digitsSum += number % 10;
+
+                    number =
+                        Math.floor(number / 10);
+
+                }
+
+                if (digitsSum % 2 !== 0) {
+
+                    result.push(array[i]);
+
+                }
+
+            }
+
+            document.getElementById(
+                "resultB"
+            ).textContent =
+                "Результат: " + result.join(", ");
+
+        }
+
+
+        /* =====================================
+           ЗАДАНИЕ 4
+           ===================================== */
+
+        function checkPalindrome() {
+
+            let word =
+                document.getElementById("word")
+                    .value
+                    .toLowerCase();
+
+            let reversed =
+                word
+                    .split("")
+                    .reverse()
+                    .join("");
+
+            if (word === reversed) {
+
+                document.getElementById(
+                    "resultWord"
+                ).textContent =
+                    "Это палиндром.";
+
+            } else {
+
+                document.getElementById(
+                    "resultWord"
+                ).textContent =
+                    "Это не палиндром.";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

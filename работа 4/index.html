@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Лабораторная работа 4</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Лабораторная работа №4</h1>
+
+    <!-- ЗАДАНИЕ 1 -->
+    <section>
+
+        <h2>Задание 1 — Новогодняя ёлка</h2>
+
+        <div class="tree">
+
+            <div class="star">★</div>
+
+            <div class="top"></div>
+            <div class="middle"></div>
+            <div class="bottom"></div>
+
+            <div class="trunk"></div>
+
+            <div class="gift gift1"></div>
+            <div class="gift gift2"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ЗАДАНИЕ 2 -->
+    <section>
+
+        <h2>Задание 2 — Электронные часы</h2>
+
+        <div class="clock">
+
+            <div class="time">
+                <span id="hours">12</span>
+                <span>:</span>
+                <span id="minutes">00</span>
+                <span>:</span>
+                <span id="seconds">00</span>
+            </div>
+
+        </div>
+
+        <button id="button">
+            Запустить часы
+        </button>
+
+    </section>
+
+
+    <script>
+
+        let running = false;
+
+        const button = document.getElementById("button");
+
+        function updateClock() {
+
+            const now = new Date();
+
+            let hours = String(now.getHours()).padStart(2, "0");
+            let minutes = String(now.getMinutes()).padStart(2, "0");
+            let seconds = String(now.getSeconds()).padStart(2, "0");
+
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+
+        }
+
+        let timer;
+
+        button.addEventListener("click", function () {
+
+            if (!running) {
+
+                updateClock();
+
+                timer = setInterval(updateClock, 1000);
+
+                button.textContent = "Остановить часы";
+
+                running = true;
+
+            } else {
+
+                clearInterval(timer);
+
+                button.textContent = "Запустить часы";
+
+                running = false;
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

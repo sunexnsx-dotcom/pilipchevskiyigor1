@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+.product-form {
+    width: 700px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 25px;
+    background: white;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 0;
+}
+
+fieldset {
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+legend {
+    font-weight: bold;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.field label {
+    width: 200px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.radio-group {
+    display: flex;
+    gap: 25px;
+    margin-bottom: 15px;
+}
+
+.radio-group label,
+.checkbox {
+    width: auto;
+}
+
+.radio-group input,
+.checkbox input {
+    width: auto;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+
+/* Мобильная версия */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .product-form {
+        padding: 15px;
+    }
+
+    .field {
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .field label {
+        display: none;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+    }
+
+    .radio-group {
+        display: block;
+    }
+
+    .radio-group label {
+        display: block;
+        margin-bottom: 10px;
+    }
+}

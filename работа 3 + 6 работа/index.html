@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа 6</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        fieldset {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        legend {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .radio-group input,
+        .checkbox-group input {
+            width: auto;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            border: 1px solid #aaa;
+            border-radius: 8px;
+            background-color: #f7f7f7;
+        }
+
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            label {
+                display: none;
+            }
+
+            input,
+            select,
+            textarea {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Добавление товара</h1>
+
+    <form id="productForm">
+
+        <fieldset>
+
+            <legend>Информация о товаре</legend>
+
+            <div class="field">
+                <label for="name">Название товара</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Название товара"
+                >
+            </div>
+
+            <div class="field">
+                <label for="category">Категория</label>
+
+                <select id="category">
+                    <option value="">Выберите категорию</option>
+                    <option value="Электроника">Электроника</option>
+                    <option value="Одежда">Одежда</option>
+                    <option value="Обувь">Обувь</option>
+                    <option value="Мебель">Мебель</option>
+                    <option value="Другое">Другое</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="price">Цена</label>
+                <input
+                    type="number"
+                    id="price"
+                    placeholder="Цена"
+                    min="1"
+                    step="0.01"
+                >
+            </div>
+
+            <div class="field">
+                <label for="date">Дата добавления</label>
+                <input
+                    type="date"
+                    id="date"
+                >
+            </div>
+
+            <div class="field">
+                <label for="phone">Телефон</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Телефон"
+                >
+            </div>
+
+            <div class="field">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email"
+                >
+            </div>
+
+            <div class="field">
+                <label for="description">Описание товара</label>
+                <textarea
+                    id="description"
+                    placeholder="Описание товара"
+                ></textarea>
+            </div>
+
+            <div class="field">
+
+                <label>Состояние товара</label>
+
+                <div class="radio-group">
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="condition"
+                            value="Новый"
+                        >
+                        Новый
+                    </label>
+
+                    <label>
+                        <input
+                            type="radio"
+                            name="condition"
+                            value="Б/у"
+                        >
+                        Б/у
+                    </label>
+
+                </div>
+
+            </div>
+
+            <div class="field">
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        id="available"
+                    >
+
+                    <label for="available">
+                        Товар в наличии
+                    </label>
+
+                </div>
+
+            </div>
+
+            <button type="submit">
+                Добавить товар
+            </button>
+
+        </fieldset>
+
+    </form>
+
+    <div id="result"></div>
+
+</div>
+
+
+<script>
+
+document
+    .getElementById("productForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        // Получаем значения полей
+
+        let name =
+            document.getElementById("name").value.trim();
+
+        let category =
+            document.getElementById("category").value;
+
+        let price =
+            document.getElementById("price").value;
+
+        let date =
+            document.getElementById("date").value;
+
+        let phone =
+            document.getElementById("phone").value.trim();
+
+        let email =
+            document.getElementById("email").value.trim();
+
+        let description =
+            document.getElementById("description").value.trim();
+
+
+        // Проверка названия
+
+        if (name === "") {
+
+            alert("Введите название товара!");
+
+            return;
+        }
+
+
+        // Проверка категории
+
+        if (category === "") {
+
+            alert("Выберите категорию товара!");
+
+            return;
+        }
+
+
+        // Проверка цены
+
+        if (price === "" || Number(price) <= 0) {
+
+            alert("Введите корректную цену!");
+
+            return;
+        }
+
+
+        // Проверка даты
+
+        if (date === "") {
+
+            alert("Укажите дату добавления!");
+
+            return;
+        }
+
+
+        // Проверка телефона
+
+        let phonePattern =
+            /^[0-9+\-\s()]{6,20}$/;
+
+        if (!phonePattern.test(phone)) {
+
+            alert("Введите корректный номер телефона!");
+
+            return;
+        }
+
+
+        // Проверка электронной почты
+
+        let emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+
+            alert("Введите корректный Email!");
+
+            return;
+        }
+
+
+        // Проверка описания
+
+        if (description === "") {
+
+            alert("Введите описание товара!");
+
+            return;
+        }
+
+
+        // Получаем состояние товара
+
+        let condition =
+            document.querySelector(
+                'input[name="condition"]:checked'
+            );
+
+        if (!condition) {
+
+            alert("Выберите состояние товара!");
+
+            return;
+        }
+
+
+        // Получаем наличие товара
+
+        let available =
+            document.getElementById("available").checked
+                ? "Да"
+                : "Нет";
+
+
+        // Выводим данные
+
+        document.getElementById("result").innerHTML = `
+
+            <h2>Товар успешно добавлен!</h2>
+
+            <p>
+                <b>Название:</b>
+                ${name}
+            </p>
+
+            <p>
+                <b>Категория:</b>
+                ${category}
+            </p>
+
+            <p>
+                <b>Цена:</b>
+                ${price}
+            </p>
+
+            <p>
+                <b>Дата добавления:</b>
+                ${date}
+            </p>
+
+            <p>
+                <b>Телефон:</b>
+                ${phone}
+            </p>
+
+            <p>
+                <b>Email:</b>
+                ${email}
+            </p>
+
+            <p>
+                <b>Описание:</b>
+                ${description}
+            </p>
+
+            <p>
+                <b>Состояние:</b>
+                ${condition.value}
+            </p>
+
+            <p>
+                <b>В наличии:</b>
+                ${available}
+            </p>
+
+        `;
+
+
+        // Очищаем форму
+
+        document
+            .getElementById("productForm")
+            .reset();
+
+    });
+
+</script>
+
+</body>
+</html>

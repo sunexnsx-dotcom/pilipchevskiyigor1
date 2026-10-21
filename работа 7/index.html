@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Калькулятор</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #e8edf2;
+
+            font-family: Arial, sans-serif;
+        }
+
+        /* Корпус калькулятора */
+
+        .calculator {
+            width: 350px;
+            padding: 22px 18px 25px;
+
+            background: #718dad;
+
+            border-radius: 25px;
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.25),
+                inset 0 2px 3px rgba(255, 255, 255, 0.4);
+
+            border: 3px solid #5f7f9f;
+        }
+
+        /* Надпись */
+
+        .brand {
+            color: white;
+
+            font-size: 25px;
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            margin: 0 0 12px 8px;
+        }
+
+        .model {
+            float: right;
+
+            margin-top: -35px;
+            margin-right: 8px;
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* Экран */
+
+        .display {
+            width: 100%;
+            height: 82px;
+
+            margin-bottom: 20px;
+
+            padding: 8px 12px;
+
+            background: #aeb5a5;
+
+            border: 6px solid #52708c;
+            border-radius: 12px;
+
+            color: #17201c;
+
+            text-align: right;
+
+            font-family: "Courier New", monospace;
+            font-size: 38px;
+
+            outline: none;
+
+            box-shadow:
+                inset 0 3px 7px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Кнопки */
+
+        .buttons {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 9px;
+        }
+
+        button {
+            height: 58px;
+
+            border: none;
+            border-radius: 9px;
+
+            font-size: 22px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            color: #202a45;
+
+            background: #e5e7df;
+
+            box-shadow:
+                0 3px 0 #aeb1ac,
+                inset 0 1px 2px rgba(255,255,255,0.8);
+
+            transition: 0.1s;
+        }
+
+        button:hover {
+            filter: brightness(1.08);
+        }
+
+        button:active {
+            transform: translateY(2px);
+
+            box-shadow:
+                0 1px 0 #aeb1ac;
+        }
+
+        /* Синие кнопки */
+
+        .blue {
+            background: #3f4b9c;
+            color: white;
+
+            box-shadow:
+                0 3px 0 #29336f,
+                inset 0 1px 2px rgba(255,255,255,0.25);
+        }
+
+        /* Кнопка очистки */
+
+        .clear {
+            background: #d95353;
+            color: white;
+
+            box-shadow:
+                0 3px 0 #a52f2f,
+                inset 0 1px 2px rgba(255,255,255,0.3);
+        }
+
+        /* Большая кнопка + */
+
+        .plus {
+            grid-row: span 2;
+
+            height: 125px;
+
+            font-size: 32px;
+        }
+
+        /* Кнопка 0 */
+
+        .zero {
+            grid-column: span 1;
+        }
+
+        /* Кнопка = */
+
+        .equals {
+            background: #4652a3;
+            color: white;
+        }
+
+        @media (max-width: 500px) {
+
+            .calculator {
+                width: 330px;
+            }
+
+            .display {
+                font-size: 32px;
+            }
+
+            button {
+                height: 55px;
+            }
+
+            .plus {
+                height: 119px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="calculator">
+
+    <div class="brand">
+        CALCULATOR
+    </div>
+
+    <div class="model">
+        LC-2026
+    </div>
+
+    <input
+        type="text"
+        class="display"
+        id="display"
+        value="0"
+        readonly
+    >
+
+    <div class="buttons">
+
+        <!-- Первый ряд -->
+
+        <button
+            class="clear"
+            onclick="clearAll()">
+            C/CE
+        </button>
+
+        <button
+            class="blue"
+            onclick="memoryRecall()">
+            MRC
+        </button>
+
+        <button
+            class="blue"
+            onclick="squareRoot()">
+            √
+        </button>
+
+        <button
+            class="blue"
+            onclick="percent()">
+            %
+        </button>
+
+
+        <!-- Второй ряд -->
+
+        <button
+            class="blue"
+            onclick="memoryMinus()">
+            M−
+        </button>
+
+        <button
+            class="blue"
+            onclick="memoryPlus()">
+            M+
+        </button>
+
+        <button
+            class="blue"
+            onclick="backspace()">
+            ←
+        </button>
+
+        <button
+            class="blue"
+            onclick="chooseOperation('/')">
+            ÷
+        </button>
+
+
+        <!-- Третий ряд -->
+
+        <button onclick="inputNumber('7')">
+            7
+        </button>
+
+        <button onclick="inputNumber('8')">
+            8
+        </button>
+
+        <button onclick="inputNumber('9')">
+            9
+        </button>
+
+        <button
+            class="blue"
+            onclick="chooseOperation('*')">
+            ×
+        </button>
+
+
+        <!-- Четвёртый ряд -->
+
+        <button onclick="inputNumber('4')">
+            4
+        </button>
+
+        <button onclick="inputNumber('5')">
+            5
+        </button>
+
+        <button onclick="inputNumber('6')">
+            6
+        </button>
+
+        <button
+            class="blue"
+            onclick="chooseOperation('-')">
+            −
+        </button>
+
+
+        <!-- Пятый ряд -->
+
+        <button onclick="inputNumber('1')">
+            1
+        </button>
+
+        <button onclick="inputNumber('2')">
+            2
+        </button>
+
+        <button onclick="inputNumber('3')">
+            3
+        </button>
+
+        <button
+            class="blue plus"
+            onclick="chooseOperation('+')">
+            +
+        </button>
+
+
+        <!-- Шестой ряд -->
+
+        <button onclick="inputNumber('0')">
+            0
+        </button>
+
+        <button onclick="inputDecimal()">
+            .
+        </button>
+
+        <button
+            class="equals"
+            onclick="calculate()">
+            =
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    let display =
+        document.getElementById("display");
+
+    let firstNumber = null;
+
+    let operation = null;
+
+    let waitingForSecondNumber = false;
+
+    let memory = 0;
+
+
+    // Ввод цифр
+
+    function inputNumber(number) {
+
+        if (
+            display.value === "0" ||
+            waitingForSecondNumber ||
+            display.value === "Ошибка"
+        ) {
+
+            display.value = number;
+
+            waitingForSecondNumber = false;
+
+        } else {
+
+            display.value += number;
+
+        }
+    }
+
+
+    // Десятичная точка
+
+    function inputDecimal() {
+
+        if (waitingForSecondNumber) {
+
+            display.value = "0.";
+
+            waitingForSecondNumber = false;
+
+            return;
+        }
+
+        if (!display.value.includes(".")) {
+
+            display.value += ".";
+
+        }
+    }
+
+
+    // Выбор операции
+
+    function chooseOperation(op) {
+
+        firstNumber =
+            Number(display.value);
+
+        operation = op;
+
+        waitingForSecondNumber = true;
+    }
+
+
+    // Вычисление
+
+    function calculate() {
+
+        if (
+            firstNumber === null ||
+            operation === null
+        ) {
+
+            return;
+        }
+
+        let secondNumber =
+            Number(display.value);
+
+        let result;
+
+
+        switch (operation) {
+
+            case "+":
+
+                result =
+                    firstNumber + secondNumber;
+
+                break;
+
+
+            case "-":
+
+                result =
+                    firstNumber - secondNumber;
+
+                break;
+
+
+            case "*":
+
+                result =
+                    firstNumber * secondNumber;
+
+                break;
+
+
+            case "/":
+
+                if (secondNumber === 0) {
+
+                    display.value = "Ошибка";
+
+                    firstNumber = null;
+
+                    operation = null;
+
+                    return;
+                }
+
+                result =
+                    firstNumber / secondNumber;
+
+                break;
+        }
+
+
+        display.value = result;
+
+        firstNumber = null;
+
+        operation = null;
+
+        waitingForSecondNumber = true;
+    }
+
+
+    // C/CE
+
+    function clearAll() {
+
+        display.value = "0";
+
+        firstNumber = null;
+
+        operation = null;
+
+        waitingForSecondNumber = false;
+    }
+
+
+    // Удаление последнего символа
+
+    function backspace() {
+
+        if (
+            display.value.length > 1 &&
+            display.value !== "Ошибка"
+        ) {
+
+            display.value =
+                display.value.slice(0, -1);
+
+        } else {
+
+            display.value = "0";
+        }
+    }
+
+
+    // Квадратный корень
+
+    function squareRoot() {
+
+        let number =
+            Number(display.value);
+
+        if (number < 0) {
+
+            display.value = "Ошибка";
+
+            return;
+        }
+
+        display.value =
+            Math.sqrt(number);
+    }
+
+
+    // Процент
+
+    function percent() {
+
+        let number =
+            Number(display.value);
+
+        display.value =
+            number / 100;
+    }
+
+
+    // Память M+
+
+    function memoryPlus() {
+
+        memory +=
+            Number(display.value);
+    }
+
+
+    // Память M-
+
+    function memoryMinus() {
+
+        memory -=
+            Number(display.value);
+    }
+
+
+    // Память MRC
+
+    function memoryRecall() {
+
+        display.value = memory;
+    }
+
+</script>
+
+</body>
+</html>

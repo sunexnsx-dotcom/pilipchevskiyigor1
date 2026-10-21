@@ -1,0 +1,453 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f3f3;
+    color: #111;
+}
+
+
+/* ========================================
+   ЗАДАНИЕ 1
+   ======================================== */
+
+.task1 {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.task1 h1 {
+    margin: 0 0 30px;
+}
+
+.numbers {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 40px;
+}
+
+.digit {
+    display: flex;
+    flex-direction: column;
+}
+
+.digit-row {
+    width: 175px;
+    height: 35px;
+
+    display: flex;
+}
+
+.digit-row > div {
+    width: 35px;
+    height: 35px;
+}
+
+.digit-row .b {
+    background: #000;
+}
+
+
+/* ========================================
+   ЗАДАНИЕ 2
+   ======================================== */
+
+.task2 {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 30px 0;
+
+    background: #fff;
+}
+
+.task2 h1,
+.task2 .info {
+    width: min(1200px, 100%);
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.task2 h1 {
+    margin-top: 0;
+}
+
+.info {
+    margin-bottom: 25px;
+}
+
+
+/* Основной контейнер */
+
+.layout {
+    width: min(1200px, 100%);
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* Каждый объект */
+
+.object {
+    width: 100%;
+    min-height: 150px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Строка */
+
+.line {
+    width: 100%;
+    min-height: 75px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* Блоки */
+
+.block,
+.empty {
+    min-height: 75px;
+    flex-shrink: 0;
+}
+
+.empty {
+    background: transparent;
+}
+
+
+/* ========================================
+   ШИРИНА БЛОКОВ
+   12 колонок
+   ======================================== */
+
+.w1 {
+    flex: 0 0 8.3333%;
+}
+
+.w2 {
+    flex: 0 0 16.6667%;
+}
+
+.w3 {
+    flex: 0 0 25%;
+}
+
+.w4 {
+    flex: 0 0 33.3333%;
+}
+
+.w6 {
+    flex: 0 0 50%;
+}
+
+.w8 {
+    flex: 0 0 66.6667%;
+}
+
+.w9 {
+    flex: 0 0 75%;
+}
+
+.w12 {
+    flex: 0 0 100%;
+}
+
+
+/* Высота */
+
+.h2 {
+    min-height: 150px;
+}
+
+.h3 {
+    min-height: 225px;
+}
+
+
+/* ========================================
+   ОБЪЕКТ 1
+   ======================================== */
+
+.red-light {
+    background: #CD5C5C;
+}
+
+.red {
+    background: #DC143C;
+}
+
+.dark-red {
+    background: #8B0000;
+}
+
+
+/* ========================================
+   ОБЪЕКТ 2
+   ======================================== */
+
+.pink-light {
+    background: #FFC0CB;
+}
+
+.pink {
+    background: #FF69B4;
+}
+
+.pink-dark {
+    background: #C71585;
+}
+
+
+/* ========================================
+   ОБЪЕКТ 3
+   ======================================== */
+
+.green-1 {
+    background: #32CD32;
+}
+
+.green-2 {
+    background: #00FA9A;
+}
+
+.green-3 {
+    background: #00FF00;
+}
+
+.green-4 {
+    background: #2E8B57;
+}
+
+.green-5 {
+    background: #006400;
+}
+
+.green-6 {
+    background: #9ACD32;
+}
+
+.green-7 {
+    background: #808000;
+}
+
+
+/* ========================================
+   ОБЪЕКТ 4
+   ======================================== */
+
+.orange-light {
+    background: #FFA07A;
+}
+
+.orange-red {
+    background: #FF4500;
+}
+
+.orange {
+    background: #FFA500;
+}
+
+
+/* ========================================
+   ОБЪЕКТ 5
+   ======================================== */
+
+.brown-light {
+    background: #BC8F8F;
+}
+
+.sand {
+    background: #F4A460;
+}
+
+.brown {
+    background: #8B4513;
+}
+
+.brown-red {
+    background: #A52A2A;
+}
+
+.maroon {
+    background: #800000;
+}
+
+
+/* ========================================
+   РАЗМЕР 768px
+   ======================================== */
+
+@media (max-width: 1199px) {
+
+    .layout,
+    .task2 h1,
+    .task2 .info {
+        width: 768px;
+        max-width: 100%;
+    }
+
+    .layout {
+        gap: 20px;
+    }
+}
+
+
+/* ========================================
+   РАЗМЕР 320px
+   ======================================== */
+
+@media (max-width: 767px) {
+
+    /* Задание 1 */
+
+    .task1 {
+        min-height: 100vh;
+    }
+
+    .numbers {
+        gap: 15px;
+    }
+
+    .digit-row {
+        width: 100px;
+        height: 20px;
+    }
+
+    .digit-row > div {
+        width: 20px;
+        height: 20px;
+    }
+
+
+    /* Задание 2 */
+
+    .task2 {
+        padding: 20px 0;
+        overflow-x: auto;
+    }
+
+    .task2 h1,
+    .task2 .info {
+        width: 360px;
+    }
+
+    .layout {
+        width: 360px;
+        gap: 15px;
+    }
+
+    .object {
+        min-height: 150px;
+    }
+
+    .line {
+        min-height: 50px;
+    }
+
+    .block,
+    .empty {
+        min-height: 50px;
+    }
+
+    .h2 {
+        min-height: 100px;
+    }
+
+    .h3 {
+        min-height: 150px;
+    }
+
+
+    /* Объект 1 */
+
+    .object-1 .w3 {
+        flex-basis: 50%;
+    }
+
+    .object-1 .w6 {
+        flex-basis: 50%;
+    }
+
+    .object-1 .dark-red {
+        display: none;
+    }
+
+
+    /* Объект 2 */
+
+    .object-2 .w8 {
+        flex-basis: 100%;
+    }
+
+    .object-2 .pink-dark {
+        flex-basis: 100%;
+    }
+
+    .object-2 .empty {
+        display: none;
+    }
+
+
+    /* Объект 3 */
+
+    .object-3 .w3,
+    .object-3 .w6 {
+        flex-basis: 50%;
+    }
+
+    .object-3 .green-3 {
+        flex-basis: 50%;
+    }
+
+
+    /* Объект 4 */
+
+    .object-4 .empty {
+        display: none;
+    }
+
+    .object-4 .w2 {
+        flex-basis: 50%;
+    }
+
+
+    /* Объект 5 */
+
+    .object-5 .w3,
+    .object-5 .w6 {
+        flex-basis: 100%;
+    }
+
+    .object-5 .line {
+        flex-wrap: wrap;
+    }
+
+}
